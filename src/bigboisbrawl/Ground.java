@@ -10,15 +10,9 @@ package bigboisbrawl;
  * @author user
  */
 public class Ground {
-    private double x1;
-    private double x2;
-    private double y1;
-    private double y2;
+    private Rectangle space;
     public Ground(double x, double x_2, double y, double y_2){
-        x1 = x;
-        x2 = x_2;
-        y1 = y;
-        y2 = y_2;
+        space = new Rectangle(x, x_2, y, y_2);
     }
     /*
     Name: Collide
