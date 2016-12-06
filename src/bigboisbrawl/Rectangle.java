@@ -10,7 +10,7 @@ package bigboisbrawl;
  * @author user
  */
 public class Rectangle {
-    public double x1; //smsller
+    public double x1; //smaller
     public double x2; //larger
     public double y1; //smaller
     public double y2; //larger
@@ -21,10 +21,10 @@ public class Rectangle {
         y1 = y;
         y2 = y_2;
     }
-    /*
-    Name: changePos
-    Arguments: All from player: x, y, height, width
-    Logic: coordnates will be set based on x and y values passed in and width and height
-    Return: void
-    */
+    public void changePos(double x, double y, double h, double w){
+        x2 = x;
+        y1 = y;
+        x1 = x + w;
+        y2 = y + h;
+    }
 }

@@ -17,6 +17,7 @@ public class Player {
     private Image punch;
     private Image kick;
     private Image power;
+    private Image hit;
     private Image death;
     private Rectangle playerBox;
     private double x; //x coordnate of the top left of the image
@@ -30,14 +31,31 @@ public class Player {
     private double lateralMovement = 0;
     private double verticalMovement = 0;
     private boolean movingUp = false;
+    public boolean isDead = false;
+    private long moveStop = 0;
     private final double JUMP_HEIGHT = 20; //20 is arbitrary. Used for how high a jump goes
 
-    /*
-    Constructor
-    Arguments: all the locations for the images, top left coordnates of image, width and height, the power of their moves and health
-    Logic: Sets stuff equal to arguments
-    Return: none
-    */
+    public Player(Image l, Image r, Image jl, Image jr, Image p, Image k, Image pow, Image ht, Image d, double x_1, double y_1, double h, double w, double pp, double kp, double powp, double hlth){
+        left = l;
+        right = r;
+        jumpLeft = jl;
+        jumpRight = jr;
+        punch = p;
+        kick = k;
+        power = pow;
+        hit = ht;
+        death = d;
+        x = x_1;
+        y = y_1;
+        height = h;
+        width = w;
+        playerBox = new Rectangle(x - width, y, x, y + height);
+        punchPow = pp;
+        kickPow = kp;
+        powPow = powp;
+        health = hlth;
+        
+    }
     
     /*
     Name: Move
@@ -62,13 +80,24 @@ public class Player {
     Logic: Deals damage to character being punched. Damage dealt = default damage * punchPow
     Return: void
     */
+
+    public Image punch(Player a){
+        if(System.currentTimeMillis() - moveStop >= 500){
+        a.gotHit(10 * punchPow);
+        return punch;
+        }
+        moveStop = System.currentTimeMillis();
+        return null;
+    }
     
     //Kick and power are the same thing as punch except they use kickPow and powPow respectively instead of punchPow
     
-    /*
-    Name: gotHit
-    Arguments: Double value of damage taken
-    Logic: Health - damage taken. If health <= 0, image shown is death
-    Return: void
-    */
+    public Image gotHit(double h){
+        health -= h;
+        if(h <= 0){
+            isDead = true;
+            return death;
+        }
+        return hit;
+    }
 }
