@@ -93,7 +93,7 @@ public class Player {
         return null;
     }
     public Image power(Player a){
-        if(System.currentTimeMillis() - moveStop >= 1000){
+        if(System.currentTimeMillis() - moveStop >= 1200){
             a.gotHit(10 * powPow);
             return power;
         }
