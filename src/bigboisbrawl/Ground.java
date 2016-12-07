@@ -10,7 +10,7 @@ package bigboisbrawl;
  * @author user
  */
 public class Ground {
-    private Rectangle space;
+    private final Rectangle space;
     public Ground(double x, double x_2, double y, double y_2){
         space = new Rectangle(x, x_2, y, y_2);
     }
