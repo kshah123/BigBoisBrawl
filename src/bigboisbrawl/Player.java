@@ -10,30 +10,30 @@ import java.awt.Image;
  * @author user
  */
 public class Player {
-    private Image left;
-    private Image right;
-    private Image jumpLeft;
-    private Image jumpRight;
-    private Image punch;
-    private Image kick;
-    private Image power;
-    private Image hit;
-    private Image death;
+    private final Image left;
+    private final Image right;
+    private final Image jumpLeft;
+    private final Image jumpRight;
+    private final Image punch;
+    private final Image kick;
+    private final Image power;
+    private final Image hit;
+    private final Image death;
     private Rectangle playerBox;
     private double x; //x coordnate of the top left of the image
     private double y; //y coordnate of the top left of the image
-    private double height; //vertical distance of image
-    private double width; //horizontal distance of image
-    private double punchPow; //These are constants that are
-    private double kickPow; // set after the construnctor is
-    private double powPow; // called and determine power of moves 
+    private final double height; //vertical distance of image
+    private final double width; //horizontal distance of image
+    private final double punchPow; //These are constants that are
+    private final double kickPow; // set after the construnctor is
+    private final double powPow; // called and determine power of moves 
     private double health;
     private double lateralMovement = 0;
     private double verticalMovement = 0;
     private boolean movingUp = false;
     public boolean isDead = false;
     private long moveStop = 0;
-    private final double JUMP_HEIGHT = 20; //20 is arbitrary. Used for how high a jump goes
+    private final static double JUMP_HEIGHT = 20; //20 is arbitrary. Used for how high a jump goes
 
     public Player(Image l, Image r, Image jl, Image jr, Image p, Image k, Image pow, Image ht, Image d, double x_1, double y_1, double h, double w, double pp, double kp, double powp, double hlth){
         left = l;
@@ -74,23 +74,33 @@ public class Player {
     Return: void
     */
     
-    /*
-    Name: Punch
-    Arguments: Character being punched
-    Logic: Deals damage to character being punched. Damage dealt = default damage * punchPow
-    Return: void
-    */
 
+    //MISSING FROM ALL ATTACK METHODS: CHECKING IF COLLISSION IS TRUE
     public Image punch(Player a){
         if(System.currentTimeMillis() - moveStop >= 500){
-        a.gotHit(10 * punchPow);
-        return punch;
+            a.gotHit(10 * punchPow);
+            return punch;
+        }
+        moveStop = System.currentTimeMillis();
+        return null;
+    }
+    public Image kick(Player a){
+        if(System.currentTimeMillis() - moveStop >= 750){
+            a.gotHit(20 * kickPow);
+            return kick;
+        }
+        moveStop = System.currentTimeMillis();
+        return null;
+    }
+    public Image power(Player a){
+        if(System.currentTimeMillis() - moveStop >= 1000){
+            a.gotHit(10 * powPow);
+            return power;
         }
         moveStop = System.currentTimeMillis();
         return null;
     }
     
-    //Kick and power are the same thing as punch except they use kickPow and powPow respectively instead of punchPow
     
     public Image gotHit(double h){
         health -= h;
@@ -100,4 +110,11 @@ public class Player {
         }
         return hit;
     }
+    
+    /*
+    Name: Collide
+    Arguments: Player attacking this player
+    Logic: Checks if attacking player collides with this player
+    Return: Boolean
+    */
 }
