@@ -20,8 +20,8 @@ public class Player {
     private final Image hit;
     private final Image death;
     private Rectangle playerBox;
-    private double x; //x coordnate of the top left of the image
-    private double y; //y coordnate of the top left of the image
+    public double x; //x coordnate of the top left of the image
+    public double y; //y coordnate of the top left of the image
     private final double height; //vertical distance of image
     private final double width; //horizontal distance of image
     private final double punchPow; //These are constants that are
@@ -109,6 +109,10 @@ public class Player {
             return death;
         }
         return hit;
+    }
+    public Image die(){
+        isDead = true;
+        return death;
     }
     
     /*
