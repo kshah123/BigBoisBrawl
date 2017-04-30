@@ -69,7 +69,7 @@ public class Player {
             else if(gc.getInput().isKeyDown(Input.KEY_LEFT));
                 xDir = -1;
             x = x + xDir;
-            y = Math.pow(t, 2) - (9.8 * t) + yI;
+            y = -1 * Math.pow(t, 2) + (9.8 * t) + yI;
             t++;
         }
     }
